@@ -26,6 +26,10 @@ import (
 
 {{- range .Service}}
 
+{{- $serviceName := .GetName}}
+{{- $serviceSubject := GetServiceSubject .}}
+{{- $serviceSubjectParams := GetServiceSubjectParams .}}
+
 // {{.GetName}}Server is the interface that providers of the service
 // {{.GetName}} should implement.
 type {{.GetName}}Server interface {
@@ -128,20 +132,24 @@ func New{{.GetName}}ConcurrentHandler(workers *nrpc.WorkerPool, nc nrpc.NatsConn
 	}
 }
 
-func (h *{{.GetName}}Handler) Subject() string {
-	return "{{$pkgSubjectPrefix}}
-	{{- range $pkgSubjectParams -}}
-		*.
+func (h *{{.GetName}}Handler) Subject(
+	{{- range $i, $e := $pkgSubjectParams -}}
+		{{if $i}}, {{end}}pkg{{.}} string
 	{{- end -}}
-	{{GetServiceSubject .}}
-	{{- range GetServiceSubjectParams . -}}
-		.*
+	{{- if ne 0 (len $serviceSubjectParams) -}}
+		{{- if ne 0 (len $pkgSubjectParams)}}, {{end -}}
+		{{- range $i, $e := $serviceSubjectParams -}}
+			{{if $i}}, {{end}}svc{{.}} string
+		{{- end -}}
 	{{- end -}}
-	.>"
+) string {
+	return "{{$pkgSubject}}."
+	{{- range $pkgSubjectParams}} + pkg{{.}} + "." {{end -}}
+	+ "{{$serviceSubject}}."
+	{{- range $serviceSubjectParams}} + svc{{.}} + "." {{end -}}
+	+ ">"
+
 }
-{{- $serviceName := .GetName}}
-{{- $serviceSubject := GetServiceSubject .}}
-{{- $serviceSubjectParams := GetServiceSubjectParams .}}
 {{- range .Method}}
 {{- if eq .GetInputType ".nrpc.NoRequest"}}
 
