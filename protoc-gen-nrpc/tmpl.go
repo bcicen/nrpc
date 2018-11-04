@@ -366,7 +366,7 @@ func New{{.GetName}}Client(nc nrpc.NatsConn
 	return &{{.GetName}}Client{
 		nc:      nc,
 		{{- if ne 0 (len $pkgSubject)}}
-		PkgSubject: "{{$pkgSubject}}",
+		PkgSubject: ServiceName,
 		{{- end}}
 		{{- range $pkgSubjectParams}}
 		PkgParam{{.}}: pkgParam{{.}},
