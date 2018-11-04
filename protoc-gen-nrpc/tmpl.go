@@ -30,6 +30,8 @@ import (
 {{- $serviceSubject := GetServiceSubject .}}
 {{- $serviceSubjectParams := GetServiceSubjectParams .}}
 
+const ServiceName = "{{$pkgSubject}}"
+
 // {{.GetName}}Server is the interface that providers of the service
 // {{.GetName}} should implement.
 type {{.GetName}}Server interface {
