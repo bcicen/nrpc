@@ -11,6 +11,7 @@ package {{$pkgName}}
 import (
 	"context"
 	"log"
+	"fmt"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -565,6 +566,14 @@ func (c *{{$serviceName}}Client) {{.GetName}}(
 {{- end}}
 
 	return
+}
+
+func (c *{{$serviceName}}Client) {{.GetName}}Endpoint(ctx context.Context, ireq interface{}) (interface{}, error)
+	req, ok := ireq.({{GoType .GetInputType}})
+	if !ok {
+		return nil, fmt.Errorf("invalid request type (expected {{GoType .GetInputType}})")
+	}
+	return c.{{.GetName}}(req)
 }
 {{- end}}
 {{- end}}
