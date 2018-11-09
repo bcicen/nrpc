@@ -568,7 +568,7 @@ func (c *{{$serviceName}}Client) {{.GetName}}(
 	return
 }
 
-func (c *{{$serviceName}}Client) {{.GetName}}Endpoint(ctx context.Context, ireq interface{}) (interface{}, error)
+func (c *{{$serviceName}}Client) {{.GetName}}Endpoint(ctx context.Context, ireq interface{}) (interface{}, error) {
 	req, ok := ireq.({{GoType .GetInputType}})
 	if !ok {
 		return nil, fmt.Errorf("invalid request type (expected {{GoType .GetInputType}})")
