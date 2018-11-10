@@ -72,7 +72,7 @@ func (h *SvcCustomSubjectHandler) Handler(msg *nats.Msg) {
 	pkgParams, _, name, tail, err := nrpc.ParseSubject(
 		"root", 1, "custom_subject", 0, msg.Subject)
 	if err != nil {
-		log.Printf("SvcCustomSubjectHanlder: SvcCustomSubject subject parsing failed: %v", err)
+		log.Printf("SvcCustomSubjectHandler: SvcCustomSubject subject parsing failed: %v", err)
 		return
 	}
 
@@ -86,7 +86,7 @@ func (h *SvcCustomSubjectHandler) Handler(msg *nats.Msg) {
 	case "mt_simple_reply":
 		_, request.Encoding, err = nrpc.ParseSubjectTail(0, request.SubjectTail)
 		if err != nil {
-			log.Printf("MtSimpleReplyHanlder: MtSimpleReply subject parsing failed: %v", err)
+			log.Printf("MtSimpleReplyHandler: MtSimpleReply subject parsing failed: %v", err)
 			break
 		}
 		var req StringArg
@@ -108,7 +108,7 @@ func (h *SvcCustomSubjectHandler) Handler(msg *nats.Msg) {
 	case "mtvoidreply":
 		_, request.Encoding, err = nrpc.ParseSubjectTail(0, request.SubjectTail)
 		if err != nil {
-			log.Printf("MtVoidReplyHanlder: MtVoidReply subject parsing failed: %v", err)
+			log.Printf("MtVoidReplyHandler: MtVoidReply subject parsing failed: %v", err)
 			break
 		}
 		var req StringArg
@@ -134,7 +134,7 @@ func (h *SvcCustomSubjectHandler) Handler(msg *nats.Msg) {
 	case "mtstreamedreply":
 		_, request.Encoding, err = nrpc.ParseSubjectTail(0, request.SubjectTail)
 		if err != nil {
-			log.Printf("MtStreamedReplyHanlder: MtStreamedReply subject parsing failed: %v", err)
+			log.Printf("MtStreamedReplyHandler: MtStreamedReply subject parsing failed: %v", err)
 			break
 		}
 		var req StringArg
@@ -156,7 +156,7 @@ func (h *SvcCustomSubjectHandler) Handler(msg *nats.Msg) {
 	case "mtvoidreqstreamedreply":
 		_, request.Encoding, err = nrpc.ParseSubjectTail(0, request.SubjectTail)
 		if err != nil {
-			log.Printf("MtVoidReqStreamedReplyHanlder: MtVoidReqStreamedReply subject parsing failed: %v", err)
+			log.Printf("MtVoidReqStreamedReplyHandler: MtVoidReqStreamedReply subject parsing failed: %v", err)
 			break
 		}
 		var req github_com_nats_rpc_nrpc.Void
@@ -421,7 +421,7 @@ func (h *SvcSubjectParamsHandler) Handler(msg *nats.Msg) {
 	pkgParams, svcParams, name, tail, err := nrpc.ParseSubject(
 		"root", 1, "svcsubjectparams", 1, msg.Subject)
 	if err != nil {
-		log.Printf("SvcSubjectParamsHanlder: SvcSubjectParams subject parsing failed: %v", err)
+		log.Printf("SvcSubjectParamsHandler: SvcSubjectParams subject parsing failed: %v", err)
 		return
 	}
 
@@ -437,7 +437,7 @@ func (h *SvcSubjectParamsHandler) Handler(msg *nats.Msg) {
 		var mtParams []string
 		mtParams, request.Encoding, err = nrpc.ParseSubjectTail(2, request.SubjectTail)
 		if err != nil {
-			log.Printf("MtWithSubjectParamsHanlder: MtWithSubjectParams subject parsing failed: %v", err)
+			log.Printf("MtWithSubjectParamsHandler: MtWithSubjectParams subject parsing failed: %v", err)
 			break
 		}
 		var req github_com_nats_rpc_nrpc.Void
@@ -460,7 +460,7 @@ func (h *SvcSubjectParamsHandler) Handler(msg *nats.Msg) {
 		var mtParams []string
 		mtParams, request.Encoding, err = nrpc.ParseSubjectTail(2, request.SubjectTail)
 		if err != nil {
-			log.Printf("MtStreamedReplyWithSubjectParamsHanlder: MtStreamedReplyWithSubjectParams subject parsing failed: %v", err)
+			log.Printf("MtStreamedReplyWithSubjectParamsHandler: MtStreamedReplyWithSubjectParams subject parsing failed: %v", err)
 			break
 		}
 		var req github_com_nats_rpc_nrpc.Void
@@ -483,7 +483,7 @@ func (h *SvcSubjectParamsHandler) Handler(msg *nats.Msg) {
 		request.NoReply = true
 		_, request.Encoding, err = nrpc.ParseSubjectTail(0, request.SubjectTail)
 		if err != nil {
-			log.Printf("MtNoReplyHanlder: MtNoReply subject parsing failed: %v", err)
+			log.Printf("MtNoReplyHandler: MtNoReply subject parsing failed: %v", err)
 			break
 		}
 		var req github_com_nats_rpc_nrpc.Void

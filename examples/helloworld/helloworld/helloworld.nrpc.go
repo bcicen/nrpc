@@ -58,7 +58,7 @@ func (h *GreeterHandler) Handler(msg *nats.Msg) {
 	_, _, name, tail, err := nrpc.ParseSubject(
 		"helloworld", 0, "Greeter", 0, msg.Subject)
 	if err != nil {
-		log.Printf("GreeterHanlder: Greeter subject parsing failed: %v", err)
+		log.Printf("GreeterHandler: Greeter subject parsing failed: %v", err)
 		return
 	}
 
@@ -71,7 +71,7 @@ func (h *GreeterHandler) Handler(msg *nats.Msg) {
 	case "SayHello":
 		_, request.Encoding, err = nrpc.ParseSubjectTail(0, request.SubjectTail)
 		if err != nil {
-			log.Printf("SayHelloHanlder: SayHello subject parsing failed: %v", err)
+			log.Printf("SayHelloHandler: SayHello subject parsing failed: %v", err)
 			break
 		}
 		var req HelloRequest

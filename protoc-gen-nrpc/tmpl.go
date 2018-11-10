@@ -193,7 +193,7 @@ func (h *{{.GetName}}Handler) Handler(msg *nats.Msg) {
 	, name, tail, err := nrpc.ParseSubject(
 		"{{$pkgSubject}}", {{len $pkgSubjectParams}}, "{{GetServiceSubject .}}", {{len (GetServiceSubjectParams .)}}, msg.Subject)
 	if err != nil {
-		log.Printf("{{.GetName}}Hanlder: {{.GetName}} subject parsing failed: %v", err)
+		log.Printf("{{.GetName}}Handler: {{.GetName}} subject parsing failed: %v", err)
 		return
 	}
 
@@ -224,7 +224,7 @@ func (h *{{.GetName}}Handler) Handler(msg *nats.Msg) {
 		{{- end}}
 		{{if eq 0 (len (GetMethodSubjectParams .))}}_{{else}}mtParams{{end}}, request.Encoding, err = nrpc.ParseSubjectTail({{len (GetMethodSubjectParams .)}}, request.SubjectTail)
 		if err != nil {
-			log.Printf("{{.GetName}}Hanlder: {{.GetName}} subject parsing failed: %v", err)
+			log.Printf("{{.GetName}}Handler: {{.GetName}} subject parsing failed: %v", err)
 			break
 		}
 		var req {{GoType .GetInputType}}
