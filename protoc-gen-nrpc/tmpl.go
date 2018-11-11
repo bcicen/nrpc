@@ -573,7 +573,8 @@ func (c *{{$serviceName}}Client) {{.GetName}}Endpoint(ctx context.Context, ireq 
 	if !ok {
 		return nil, fmt.Errorf("invalid request type (expected {{GoType .GetInputType}})")
 	}
-	return c.{{.GetName}}(req)
+	res, err := c.{{.GetName}}(req)
+	return &res, err
 }
 {{- end}}
 {{- end}}
