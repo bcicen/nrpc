@@ -607,7 +607,7 @@ func Publish(resp proto.Message, withError *Error, nc NatsConn, subject string, 
 func CaptureErrors(fn func() (proto.Message, error)) (msg proto.Message, replyError *Error) {
 	defer func() {
 		if r := recover(); r != nil {
-			log.Printf("Caught panic: %s\n%s", r, debug.Stack())
+			log.Printf("Caught panic: %s\n%s", r, string(debug.Stack()))
 			replyError = &Error{
 				Type:    Error_SERVER,
 				Message: fmt.Sprint(r),
